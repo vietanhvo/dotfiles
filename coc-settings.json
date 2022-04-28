@@ -1,0 +1,13 @@
+{
+    "npm.binPath": "/home/vietvo/.nvm/versions/node/v16.13.2/bin/npm",
+    "git.addGBlameToVirtualText": true,
+    "python.formatting.autopep8Path": "/home/vietvo/.local/bin/autopep8",
+    "prettier.tabWidth": 4,
+    "cSpell.userWords": [
+      "antlr",
+      "chrono",
+      "gruvbox",
+      "rustacean",
+      "rustaceans"
+    ]
+}
