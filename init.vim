@@ -34,6 +34,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'github/copilot.vim'
   Plug 'rcarriga/nvim-notify'
   Plug 'karb94/neoscroll.nvim'
+  Plug 'diepm/vim-rest-console'
 call plug#end()
 
 let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'

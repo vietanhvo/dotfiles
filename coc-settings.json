@@ -4,10 +4,11 @@
     "python.formatting.autopep8Path": "/home/vietvo/.local/bin/autopep8",
     "prettier.tabWidth": 4,
     "cSpell.userWords": [
-      "antlr",
-      "chrono",
-      "gruvbox",
-      "rustacean",
-      "rustaceans"
-    ]
+        "antlr",
+        "chrono",
+        "gruvbox",
+        "rustacean",
+        "rustaceans"
+    ],
+    "rust-analyzer.checkOnSave.overrideCommand": ["make", "check"]
 }
