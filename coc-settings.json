@@ -9,6 +9,7 @@
         "gruvbox",
         "rustacean",
         "rustaceans"
-    ],
-    "rust-analyzer.checkOnSave.overrideCommand": ["make", "check"]
+    ]
+    // Use this and add Makefile if root folder in Windows file system
+    // "rust-analyzer.checkOnSave.overrideCommand": ["make", "check"]
 }
