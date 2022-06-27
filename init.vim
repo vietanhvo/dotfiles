@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'tpope/vim-commentary' 
   Plug 'easymotion/vim-easymotion'
   Plug 'airblade/vim-gitgutter'
@@ -35,6 +36,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rcarriga/nvim-notify'
   Plug 'karb94/neoscroll.nvim'
   Plug 'diepm/vim-rest-console'
+  Plug 'm-demare/hlargs.nvim'
 call plug#end()
 
 let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'
@@ -125,6 +127,7 @@ noremap <leader>h <cmd>Telescope oldfiles<cr>
 noremap <leader>m <cmd>Telescope marks<cr>
 noremap <leader>w <cmd>Telescope live_grep<cr>
 noremap <leader>c <cmd>Telescope colorscheme<cr>
+noremap <leader>b <cmd>Telescope file_browser<cr>
 
 " Easymotion
 map / <Plug>(easymotion-sn)
@@ -209,36 +212,10 @@ noremap <leader>nf :ene <BAR> startinsert <CR>
 nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
 
-let g:dashboard_default_executive ='telescope'
-autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
-let g:dashboard_custom_shortcut={
-\ 'last_session'       : 'SPC s l',
-\ 'find_history'       : 'SPC h',
-\ 'find_file'          : 'SPC p',
-\ 'new_file'           : 'SPC n f',
-\ 'change_colorscheme' : 'SPC c',
-\ 'find_word'          : 'SPC w',
-\ 'book_marks'         : 'SPC m',
-\ }
-let g:dashboard_custom_header = [ 
-    \"                                                     ",
-    \"                                                     ",
-    \"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-    \"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-    \"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-    \"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-    \"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-    \"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-    \"                                                     ",
-    \"       [ Hello, Anh Viet. Welcome back home! ]       ",
-    \"                                                     ",
-    \"                                                     ",
-    \]
-
 lua <<EOF
 vim.notify = require("notify")
 -- treesitter 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -259,12 +236,11 @@ require'nvim-treesitter.configs'.setup {
 }
 require('nvim-autopairs').setup{}
 require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
     filetype_exclude = {"dashboard"},
 }
 require'colorizer'.setup()
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
 require('neoscroll').setup({
     mappings = {'<C-u>', '<C-d>', '', '',
                 '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
@@ -272,5 +248,51 @@ require('neoscroll').setup({
 require("toggleterm").setup{
     open_mapping = [[<c-\>]],
     shade_terminals = false,
+}
+require('hlargs').setup()
+
+local home = os.getenv('HOME')
+local db = require('dashboard')
+db.custom_header = {
+    '                                   ',
+    '                                   ',
+    '          ▀████▀▄▄              ▄█ ',
+    '            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
+    '    ▄        █          ▀▀▀▀▄  ▄▀  ',
+    '   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
+    '  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
+    '  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
+    '   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
+    '    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
+    '   █   █  █      ▄▄           ▄▀   ',
+    '                                   ',
+    '                                   ',
+    '                                   ',
+}
+db.custom_center = {
+    {icon = '  ',
+    desc = 'Recently opened files                   ',
+    action =  'Telescope oldfiles',
+    shortcut = 'SPC h'},
+    {icon = '  ',
+    desc = 'Find  File                              ',
+    action = 'Telescope find_files find_command=rg,--hidden,--files',
+    shortcut = 'SPC p'},
+    {icon = '  ',
+    desc ='File Browser                            ',
+    action =  'Telescope file_browser',
+    shortcut = 'SPC b'},
+    {icon = '  ',
+    desc = 'Find  word                              ',
+    action = 'Telescope live_grep',
+    shortcut = 'SPC w'},
+    {icon = '  ',
+    desc = 'Recently latest session                ',
+    shortcut = 'SPC s l',
+    action ='SessionLoad'},
+    {icon = '  ',
+    desc = 'Open Personal Settings                 ',
+    action = 'e ~/.config/nvim/init.vim',
+    shortcut = '      '},
 }
 EOF

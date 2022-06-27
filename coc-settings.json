@@ -4,11 +4,18 @@
     "python.formatting.autopep8Path": "/home/vietvo/.local/bin/autopep8",
     "prettier.tabWidth": 4,
     "cSpell.userWords": [
-        "antlr",
-        "chrono",
-        "gruvbox",
-        "rustacean",
-        "rustaceans"
+      "Hmac",
+      "Insertable",
+      "Swal",
+      "Varchar",
+      "Viet",
+      "antlr",
+      "chrono",
+      "dotenv",
+      "formik",
+      "gruvbox",
+      "rustacean",
+      "rustaceans"
     ]
     // Use this and add Makefile if root folder in Windows file system
     // "rust-analyzer.checkOnSave.overrideCommand": ["make", "check"]
