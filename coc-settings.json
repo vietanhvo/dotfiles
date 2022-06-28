@@ -14,6 +14,7 @@
       "dotenv",
       "formik",
       "gruvbox",
+      "healthcheck",
       "rustacean",
       "rustaceans"
     ]
