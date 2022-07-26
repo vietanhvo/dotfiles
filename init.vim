@@ -125,8 +125,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
    \ quit | endif
 
 " format
-command! -nargs=0 Format :call CocAction('format')
-nmap <Leader>f :Format <CR>
+" command! -nargs=0 Format :call CocAction('format')
+" nmap <Leader>f :Format <CR>
 
 " telescope
 noremap <leader>p <cmd>Telescope find_files<cr>

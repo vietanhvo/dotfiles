@@ -1,7 +1,7 @@
 vim.notify = require("notify")
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = {"rust_analyzer", "tsserver"}
+    ensure_installed = {"rust_analyzer", "tsserver", "pyright"}
 })
 -- treesitter 
 require('nvim-treesitter.configs').setup {
