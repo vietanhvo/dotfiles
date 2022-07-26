@@ -5,7 +5,14 @@ call plug#begin('~/.vim/plugged')
             \ Plug 'ryanoasis/vim-devicons'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-airline/vim-airline'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'williamboman/mason.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'L3MON4D3/LuaSnip'
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -39,7 +46,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'm-demare/hlargs.nvim'
 call plug#end()
 
-let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'
+" let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'
 let g:python3_host_prog='/usr/bin/python3'
 
 " ColorScheme
@@ -54,7 +61,7 @@ let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_sign_column_background = 'none'
-let g:gruvbox_material_palette = 'mix'
+let g:gruvbox_material_palette = 'original'
 colorscheme gruvbox-material
 
 " General Setup
@@ -147,9 +154,7 @@ map <A-k> <C-W>k
 tnoremap <Esc> <C-\><C-n>
 
 " Config for supertab
-"inoremap <Enter> <C-y>
 let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 1
 
 " Clear highlight for git column
 highlight clear signcolumn
@@ -160,25 +165,49 @@ highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 " GitGutter
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
+nmap gh] <Plug>(GitGutterNextHunk)
+nmap gh[ <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
 
-" Config for coc
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+" " Config for coc
+" augroup mygroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder.
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
 
-" highlight CocErrorHighlight ctermfg=red  guifg=#c4384b gui=underline term=underline
-" hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=underline term=underline
-" hi CocInfoHighlight gui=underline term=underline
+" nnoremap <silent> K :call ShowDocumentation()<CR>
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" function! ShowDocumentation()
+"   if CocAction('hasProvider', 'hover')
+"     call CocActionAsync('doHover')
+"   else
+"     call feedkeys('K', 'in')
+"   endif
+" endfunction
+
+" vmap <leader>a <Plug>(coc-codeaction-selected)
+" nmap <leader>a <Plug>(coc-codeaction-selected)
+
+" " GoTo code navigation.
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+
+" " Remap <C-j> and <C-k> for scroll float windows/popups.
+" if has('nvim-0.4.0') || has('patch-8.2.0750')
+"   nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"   inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"   inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"   vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" endif
 
 " airline
 let g:airline_theme="gruvbox_material"
@@ -213,88 +242,7 @@ nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
 
 lua <<EOF
-vim.notify = require("notify")
--- treesitter 
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  },
-  autotag = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true
-  }
-}
-require('nvim-autopairs').setup{}
-require("indent_blankline").setup {
-    filetype_exclude = {"dashboard"},
-}
-require'colorizer'.setup()
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('file_browser')
-require('neoscroll').setup({
-    mappings = {'<C-u>', '<C-d>', '', '',
-                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-})
-require("toggleterm").setup{
-    open_mapping = [[<c-\>]],
-    shade_terminals = false,
-}
-require('hlargs').setup()
-
-local home = os.getenv('HOME')
-local db = require('dashboard')
-db.custom_header = {
-    '                                   ',
-    '                                   ',
-    '          ▀████▀▄▄              ▄█ ',
-    '            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
-    '    ▄        █          ▀▀▀▀▄  ▄▀  ',
-    '   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
-    '  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
-    '  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
-    '   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
-    '    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
-    '   █   █  █      ▄▄           ▄▀   ',
-    '                                   ',
-    '                                   ',
-    "[Hello, welcome back. Let's build something cool!]",
-    '                                   ',
-    '                                   ',
-}
-db.custom_center = {
-    {icon = '  ',
-    desc ='File Browser                            ',
-    action =  'Telescope file_browser',
-    shortcut = 'SPC b'},
-    {icon = '  ',
-    desc = 'Recently opened files                   ',
-    action =  'Telescope oldfiles',
-    shortcut = 'SPC h'},
-    {icon = '  ',
-    desc = 'Find  File                              ',
-    action = 'Telescope find_files find_command=rg,--hidden,--files',
-    shortcut = 'SPC p'},
-    {icon = '  ',
-    desc = 'Find  word                              ',
-    action = 'Telescope live_grep',
-    shortcut = 'SPC w'},
-    {icon = '  ',
-    desc = 'Recently latest session                ',
-    shortcut = 'SPC s l',
-    action ='SessionLoad'},
-    {icon = '  ',
-    desc = 'Open Personal Settings                 ',
-    action = 'e ~/.config/nvim/init.vim',
-    shortcut = '      '},
-}
+require('setup')
+require('lsp')
+require('autocompletion')
 EOF

@@ -6,17 +6,21 @@
     "cSpell.userWords": [
       "Hmac",
       "Insertable",
+      "Pubkey",
       "Swal",
       "Varchar",
       "Viet",
       "antlr",
+      "borsh",
       "chrono",
       "dotenv",
       "formik",
       "gruvbox",
       "healthcheck",
+      "lamports",
       "rustacean",
-      "rustaceans"
+      "rustaceans",
+      "solana"
     ]
     // Use this and add Makefile if root folder in Windows file system
     // "rust-analyzer.checkOnSave.overrideCommand": ["make", "check"]
