@@ -195,6 +195,10 @@ noremap <leader>nf :ene <BAR> startinsert <CR>
 nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
 
+set updatetime=1200
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.lsp.buf.hover(nil, { focusable = false })
+
 lua <<EOF
 require('setup')
 require('lsp')
