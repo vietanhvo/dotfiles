@@ -5,9 +5,8 @@ call plug#begin('~/.vim/plugged')
             \ Plug 'ryanoasis/vim-devicons'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-airline/vim-airline'
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -19,30 +18,26 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-file-browser.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'tpope/vim-commentary' 
   Plug 'easymotion/vim-easymotion'
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'ervandew/supertab'
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'honza/vim-snippets'
   Plug 'akinsho/toggleterm.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'p00f/nvim-ts-rainbow'
   Plug 'windwp/nvim-ts-autotag'
   Plug 'windwp/nvim-autopairs'
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-  Plug 'rust-lang/rust.vim'
-  Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
+  Plug 'simrat39/rust-tools.nvim'
   Plug 'RRethy/vim-illuminate'
-  Plug 'github/copilot.vim'
   Plug 'rcarriga/nvim-notify'
   Plug 'karb94/neoscroll.nvim'
-  Plug 'diepm/vim-rest-console'
   Plug 'm-demare/hlargs.nvim'
 call plug#end()
 
@@ -124,10 +119,6 @@ let g:NERDTreeGitStatusUseNerdFonts = 1
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
    \ quit | endif
 
-" format
-" command! -nargs=0 Format :call CocAction('format')
-" nmap <Leader>f :Format <CR>
-
 " telescope
 noremap <leader>p <cmd>Telescope find_files<cr>
 noremap <leader>h <cmd>Telescope oldfiles<cr>
@@ -153,9 +144,6 @@ map <A-k> <C-W>k
 " Config for terminal
 tnoremap <Esc> <C-\><C-n>
 
-" Config for supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
 " Clear highlight for git column
 highlight clear signcolumn
 set signcolumn=number
@@ -170,44 +158,6 @@ nmap gh[ <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
-
-" " Config for coc
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-
-" nnoremap <silent> K :call ShowDocumentation()<CR>
-
-" function! ShowDocumentation()
-"   if CocAction('hasProvider', 'hover')
-"     call CocActionAsync('doHover')
-"   else
-"     call feedkeys('K', 'in')
-"   endif
-" endfunction
-
-" vmap <leader>a <Plug>(coc-codeaction-selected)
-" nmap <leader>a <Plug>(coc-codeaction-selected)
-
-" " GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-
-" " Remap <C-j> and <C-k> for scroll float windows/popups.
-" if has('nvim-0.4.0') || has('patch-8.2.0750')
-"   nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"   inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"   inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"   vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-" endif
 
 " airline
 let g:airline_theme="gruvbox_material"
@@ -244,5 +194,4 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 lua <<EOF
 require('setup')
 require('lsp')
-require('autocompletion')
 EOF
