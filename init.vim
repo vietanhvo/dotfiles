@@ -12,6 +12,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  Plug 'Saecki/crates.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }

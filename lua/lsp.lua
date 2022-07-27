@@ -104,8 +104,11 @@ cmp.setup {
         end, { 'i', 's' }),
     }),
     sources = {
+        { name = 'path' },
+        { name = "buffer" },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'nvim_lsp_signature_help' },
+        { name = "crates" },
     },
 }
