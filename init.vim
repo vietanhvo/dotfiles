@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
   Plug 'hrsh7th/cmp-buffer'
@@ -148,17 +149,15 @@ map <A-k> <C-W>k
 " Config for terminal
 tnoremap <Esc> <C-\><C-n>
 
-" Clear highlight for git column
-highlight clear signcolumn
+" Git sign column
 set signcolumn=number
-let g:gitgutter_set_sign_backgrounds = 1
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+let g:gitgutter_sign_modified = '↪'
+let g:gitgutter_sign_removed = '✕'
+let g:gitgutter_sign_modified_removed = '↪✕'
 
 " GitGutter
-nmap gh] <Plug>(GitGutterNextHunk)
-nmap gh[ <Plug>(GitGutterPrevHunk)
+nmap ]gh <Plug>(GitGutterNextHunk)
+nmap [gh <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
@@ -197,7 +196,7 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 
 set updatetime=1200
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.buf.hover(nil, { focusable = false })
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 lua <<EOF
 require('setup')
