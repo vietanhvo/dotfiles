@@ -150,10 +150,7 @@ map <A-k> <C-W>k
 tnoremap <Esc> <C-\><C-n>
 
 " Git sign column
-set signcolumn=number
-let g:gitgutter_sign_modified = '↪'
-let g:gitgutter_sign_removed = '✕'
-let g:gitgutter_sign_modified_removed = '↪✕'
+" set signcolumn=number
 
 " GitGutter
 nmap ]gh <Plug>(GitGutterNextHunk)
@@ -197,6 +194,12 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 set updatetime=1200
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+
+" Highlight color for diagnostics virtual text
+hi VirtualTextError ctermfg=167 guifg=#fb4934
+hi VirtualTextWarning ctermfg=214 guifg=#fabd2f
+hi VirtualTextInformation ctermfg=109 guifg=#83a598
+hi VirtualTextHint ctermfg=142 guifg=#b8bb26
 
 lua <<EOF
 require('setup')
