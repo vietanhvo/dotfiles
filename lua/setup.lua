@@ -4,6 +4,8 @@ vim.notify = require("notify")
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 vim.fn.sign_define('LightBulbSign', { text = "💡", texthl = "", linehl = "", numhl = "" })
 
+require'hop'.setup()
+
 require('goto-preview').setup {}
 
 -- Sign for Diagnostics
@@ -53,7 +55,10 @@ require("telescope").setup {
 require("telescope").load_extension("ui-select")
 
 require('nvim-autopairs').setup {}
+
 require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
     filetype_exclude = { "dashboard" },
 }
 require 'colorizer'.setup()

@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
   Plug 'Saecki/crates.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
@@ -25,7 +26,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'tpope/vim-commentary' 
-  Plug 'easymotion/vim-easymotion'
+  Plug 'phaazon/hop.nvim'
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
@@ -49,6 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rmagatti/goto-preview'
   Plug 'j-hui/fidget.nvim'
   Plug 'onsails/lspkind.nvim'
+  Plug 'Maan2003/lsp_lines.nvim'
 call plug#end()
 
 " let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'
@@ -137,9 +139,6 @@ noremap <leader>w <cmd>Telescope live_grep<cr>
 noremap <leader>c <cmd>Telescope colorscheme<cr>
 noremap <leader>b <cmd>Telescope file_browser<cr>
 
-" Easymotion
-map / <Plug>(easymotion-sn)
-
 " Multi select
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
@@ -197,9 +196,6 @@ nmap <Leader>ss :<C-u>SessionSave<CR>
 nmap <Leader>sl :<C-u>SessionLoad<CR>
 
 let g:cursorhold_updatetime = 500
-" set updatetime=1200
-" " Show diagnostic popup on cursor hold
-" autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " Highlight color for diagnostics virtual text
 hi VirtualTextError guifg=#ff301f
