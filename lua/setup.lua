@@ -1,17 +1,22 @@
 -- notify
 vim.notify = require("notify")
 
+require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+vim.fn.sign_define('LightBulbSign', { text = "💡", texthl = "", linehl = "", numhl = "" })
+
+require('goto-preview').setup {}
+
 -- Sign for Diagnostics
 local signs = {
-    Error = "❌",
-    Warn = "⚠️ ",
-    Hint = "💡",
-    Infor = "ℹ️ "
+    Error = "",
+    Warn = "",
+    Hint = "",
+    Infor = ""
 }
 
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
 -- treesitter
