@@ -51,6 +51,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'j-hui/fidget.nvim'
   Plug 'onsails/lspkind.nvim'
   Plug 'Maan2003/lsp_lines.nvim'
+  Plug 'zbirenbaum/copilot.lua'
+  Plug 'zbirenbaum/copilot-cmp'
 call plug#end()
 
 " let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'

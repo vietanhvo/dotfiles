@@ -1,6 +1,27 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
 
+function start_copilot()
+    require("copilot").setup({
+        cmp = {
+            enabled = true,
+            method = "getCompletionsCycling",
+        },
+        panel = { -- no config options yet
+            enabled = true,
+        },
+        ft_disable = {},
+        plugin_manager_path = vim.env.HOME .. "/.vim/plugged",
+    })
+end
+
+vim.cmd [[
+  augroup user_cmds
+    autocmd!
+    autocmd VimEnter * lua vim.defer_fn(start_copilot, 100)
+  augroup END
+]]
+
 require "fidget".setup {}
 ---@diagnostic disable: undefined-global
 -- Mappings.
@@ -33,6 +54,17 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+local lspconfig = require('lspconfig')
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = { 'pyright', 'tsserver', 'vimls', 'dockerls', 'sumneko_lua' }
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+end
+
 -- Setup for rust-tools
 require('rust-tools').setup({
     server = {
@@ -49,18 +81,6 @@ require('rust-tools').setup({
     }
 })
 
-
-local lspconfig = require('lspconfig')
-
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'pyright', 'tsserver', 'vimls', 'dockerls', 'sumneko_lua' }
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    }
-end
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 
@@ -71,6 +91,7 @@ local source_mapping = {
     nvim_lua = "[Lua]",
     cmp_tabnine = "[TN]",
     path = "[Path]",
+    copilot = "[Copilot]"
 }
 local lspkind = require('lspkind')
 
@@ -113,10 +134,13 @@ cmp.setup {
         priority_weight = 2,
         comparators = {
             require('cmp_tabnine.compare'),
+            require('copilot_cmp.comparators').prioritize,
+            require('copilot_cmp.comparators').score,
             compare.offset,
             compare.exact,
             compare.score,
             compare.recently_used,
+            compare.locality,
             compare.kind,
             compare.sort_text,
             compare.length,
@@ -125,13 +149,14 @@ cmp.setup {
     },
     sources = {
         { name = 'path' },
-        { name = "buffer" },
+        { name = 'buffer' },
         { name = 'nvim_lsp' },
-        { name = "nvim_lua" },
+        { name = 'nvim_lua' },
         { name = 'luasnip' },
         { name = 'nvim_lsp_signature_help' },
-        { name = "crates" },
+        { name = 'crates' },
         { name = 'cmp_tabnine' },
+        { name = 'copilot' }
     },
     formatting = {
         format = lspkind.cmp_format({
@@ -147,6 +172,10 @@ cmp.setup {
                     end
                     vim_item.kind = ""
                 end
+                if entry.source.name == "copilot" then
+                    vim_item.kind = ""
+                    vim_item.kind_hl_group = "CmpItemKindCopilot"
+                end
 
                 vim_item.menu = menu
 
@@ -156,6 +185,7 @@ cmp.setup {
     },
 }
 
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 -- lsp line diagnostic
 vim.diagnostic.config({
     virtual_text = false,
