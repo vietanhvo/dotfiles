@@ -156,6 +156,9 @@ hi VirtualTextWarning guifg=#ff7800
 hi VirtualTextInformation guifg=#0db9d7
 hi VirtualTextHint guifg=#7aa697
 
+" Highlight for nvim tree
+hi NvimTreeSpecialFile guifg=#F16529
+
 " Go to preview
 nnoremap gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 nnoremap gt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
