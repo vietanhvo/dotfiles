@@ -1,12 +1,19 @@
 -- notify
 vim.notify = require("notify")
 
+-- lightbulb for code action
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 vim.fn.sign_define('LightBulbSign', { text = "💡", texthl = "", linehl = "", numhl = "" })
 
-require'hop'.setup()
+-- navigate with hop
+require 'hop'.setup()
 
+-- go to definition in preview window
 require('goto-preview').setup {}
+require('todo-comments').setup {}
+
+-- comment
+require('Comment').setup()
 
 -- Sign for Diagnostics
 local signs = {

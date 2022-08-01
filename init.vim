@@ -25,7 +25,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
-  Plug 'tpope/vim-commentary' 
+  " Plug 'tpope/vim-commentary' 
+  Plug 'folke/todo-comments.nvim'
+  Plug 'numToStr/Comment.nvim'
   Plug 'phaazon/hop.nvim'
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
@@ -55,7 +57,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'zbirenbaum/copilot-cmp'
 call plug#end()
 
-" let g:coc_node_path='/home/vietvo/.nvm/versions/node/v16.13.2/bin/node'
 let g:python3_host_prog='/usr/bin/python3'
 
 " ColorScheme
