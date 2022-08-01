@@ -32,13 +32,21 @@ require('Comment').setup {
 require('todo-comments').setup {}
 
 -- file explorer
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    diagnostics = {
+        enable = true,
+    },
+    renderer = {
+        highlight_git = true,
+    }
+})
 local nt_api = require("nvim-tree.api")
 vim.keymap.set('n', '<C-b>', nt_api.tree.toggle, { noremap = true, silent = true })
 vim.keymap.set('n', '<C-o>', nt_api.tree.change_root_to_node, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>mn", nt_api.marks.navigate.next)
 vim.keymap.set("n", "<leader>mp", nt_api.marks.navigate.prev)
 vim.keymap.set("n", "<leader>ms", nt_api.marks.navigate.select)
+-- Auto close
 vim.api.nvim_create_autocmd("BufEnter", {
     nested = true,
     callback = function()
@@ -170,7 +178,10 @@ require("telescope").setup {
 }
 require("telescope").load_extension("ui-select")
 
-require('nvim-autopairs').setup {}
+require('nvim-autopairs').setup {
+    check_ts = true,
+}
+
 
 require("indent_blankline").setup {
     show_current_context = true,
