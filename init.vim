@@ -1,8 +1,5 @@
 call plug#begin('~/.vim/plugged')
   Plug 'sainnhe/gruvbox-material'
-  Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
@@ -19,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Saecki/crates.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-tree.lua'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -32,7 +30,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'terryma/vim-multiple-cursors'
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'akinsho/toggleterm.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'p00f/nvim-ts-rainbow'
@@ -117,19 +114,6 @@ filetype plugin indent on
 " Split window
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
-
-" NERDTree
-nnoremap <C-b> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-" git for NERDTree
-let g:NERDTreeGitStatusUseNerdFonts = 1
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-   \ quit | endif
 
 " telescope
 noremap <leader>p <cmd>Telescope find_files<cr>

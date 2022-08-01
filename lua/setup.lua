@@ -12,8 +12,41 @@ require 'hop'.setup()
 require('goto-preview').setup {}
 
 -- comment
-require('Comment').setup()
+require('Comment').setup {
+    pre_hook = function(ctx)
+        local U = require 'Comment.utils'
+
+        local location = nil
+        if ctx.ctype == U.ctype.block then
+            location = require('ts_context_commentstring.utils').get_cursor_location()
+        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+            location = require('ts_context_commentstring.utils').get_visual_start_location()
+        end
+
+        return require('ts_context_commentstring.internal').calculate_commentstring {
+            key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+            location = location,
+        }
+    end,
+}
 require('todo-comments').setup {}
+
+-- file explorer
+require("nvim-tree").setup()
+local nt_api = require("nvim-tree.api")
+vim.keymap.set('n', '<C-b>', nt_api.tree.toggle, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-o>', nt_api.tree.change_root_to_node, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mn", nt_api.marks.navigate.next)
+vim.keymap.set("n", "<leader>mp", nt_api.marks.navigate.prev)
+vim.keymap.set("n", "<leader>ms", nt_api.marks.navigate.select)
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+        if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
+            vim.cmd "quit"
+        end
+    end
+})
 
 -- status line
 require('lualine').setup {
@@ -44,7 +77,7 @@ require('lualine').setup {
         lualine_y = {},
         lualine_z = { 'tabs' }
     },
-    extensions = { 'nerdtree', 'toggleterm' }
+    extensions = { 'nvim-tree', 'toggleterm' }
 }
 
 -- git
@@ -120,7 +153,8 @@ require('nvim-treesitter.configs').setup {
         enable = true,
     },
     context_commentstring = {
-        enable = true
+        enable = true,
+        enable_autocmd = false,
     }
 }
 -- telescope
