@@ -27,7 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'phaazon/hop.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'tpope/vim-surround'
-  Plug 'terryma/vim-multiple-cursors'
+  Plug 'mg979/vim-visual-multi', {'branch': 'test'}
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'akinsho/toggleterm.nvim'
@@ -123,10 +123,8 @@ noremap <leader>w <cmd>Telescope live_grep<cr>
 noremap <leader>c <cmd>Telescope colorscheme<cr>
 noremap <leader>b <cmd>Telescope file_browser<cr>
 
-" Multi select
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
+" Multi cursor
+let g:VM_mouse_mappings = 1
 
 " Move between windows
 map <A-h> <C-W>h
