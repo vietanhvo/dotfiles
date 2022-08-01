@@ -26,7 +26,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'numToStr/Comment.nvim'
   Plug 'phaazon/hop.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'tpope/vim-surround'
+  Plug 'kylechui/nvim-surround'
   Plug 'mg979/vim-visual-multi', {'branch': 'test'}
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'

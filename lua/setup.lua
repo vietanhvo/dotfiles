@@ -11,6 +11,9 @@ require 'hop'.setup()
 -- go to definition in preview window
 require('goto-preview').setup {}
 
+-- surround 
+require('nvim-surround').setup {}
+
 -- comment
 require('Comment').setup {
     pre_hook = function(ctx)
