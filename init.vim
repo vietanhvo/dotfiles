@@ -25,11 +25,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
-  " Plug 'tpope/vim-commentary' 
   Plug 'folke/todo-comments.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'phaazon/hop.nvim'
-  Plug 'airblade/vim-gitgutter'
+  " Plug 'airblade/vim-gitgutter'
+  Plug 'lewis6991/gitsigns.nvim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'terryma/vim-multiple-cursors'
@@ -216,3 +216,4 @@ lua <<EOF
 require('setup')
 require('lsp')
 EOF
+set statusline+=%{get(b:,'gitsigns_status','')}
