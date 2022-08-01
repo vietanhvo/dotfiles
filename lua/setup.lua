@@ -15,6 +15,38 @@ require('goto-preview').setup {}
 require('Comment').setup()
 require('todo-comments').setup {}
 
+-- status line
+require('lualine').setup {
+    options = { theme = 'gruvbox-material' },
+    sections = {
+        lualine_b = { 'branch', 'diff' },
+        lualine_x = { {
+            'diagnostics',
+            sources = { 'nvim_lsp' },
+            sections = { 'error', 'warn', 'info', 'hint' },
+            diagnostics_color = {
+                error = 'VirtualTextError', -- Changes diagnostics' error color.
+                warn  = 'VirtualTextWarning', -- Changes diagnostics' warn color.
+                info  = 'VirtualTextInformation', -- Changes diagnostics' info color.
+                hint  = 'VirtualTextHint', -- Changes diagnostics' hint color.
+            },
+            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+            colored = true,
+            update_in_insert = false,
+            always_visible = false,
+        }, 'encoding', 'fileformat', 'filetype' },
+    },
+    tabline = {
+        lualine_a = { 'buffers' },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { 'tabs' }
+    },
+    extensions = { 'nerdtree', 'toggleterm' }
+}
+
 -- git
 require('gitsigns').setup {
     current_line_blame = false,

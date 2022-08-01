@@ -3,8 +3,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'vim-airline/vim-airline'
+  Plug 'nvim-lualine/lualine.nvim'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -28,9 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'folke/todo-comments.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'phaazon/hop.nvim'
-  " Plug 'airblade/vim-gitgutter'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'norcalli/nvim-colorizer.lua'
@@ -156,37 +153,6 @@ map <A-k> <C-W>k
 " Config for terminal
 tnoremap <Esc> <C-\><C-n>
 
-" Git sign column
-" set signcolumn=number
-
-" GitGutter
-nmap ]g <Plug>(GitGutterNextHunk)
-nmap [g <Plug>(GitGutterPrevHunk)
-nmap gs <Plug>(GitGutterStageHunk)
-nmap gu <Plug>(GitGutterUndoHunk)
-nmap gp <Plug>(GitGutterPreviewHunk)
-
-" airline
-let g:airline_theme="gruvbox_material"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
 " Resize windows by arrow keys
 map <silent> <Right> <C-w><
 map <silent> <Down> <C-W>-
@@ -216,4 +182,3 @@ lua <<EOF
 require('setup')
 require('lsp')
 EOF
-set statusline+=%{get(b:,'gitsigns_status','')}
