@@ -11,6 +11,20 @@ require 'hop'.setup()
 -- go to definition in preview window
 require('goto-preview').setup {}
 
+-- dap
+require("dapui").setup()
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+
 -- surround 
 require('nvim-surround').setup {}
 

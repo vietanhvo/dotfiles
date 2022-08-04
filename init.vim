@@ -37,6 +37,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'windwp/nvim-autopairs'
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'simrat39/rust-tools.nvim'
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'rcarriga/nvim-dap-ui'
   Plug 'RRethy/vim-illuminate'
   Plug 'rcarriga/nvim-notify'
   Plug 'karb94/neoscroll.nvim'
@@ -46,7 +48,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rmagatti/goto-preview'
   Plug 'j-hui/fidget.nvim'
   Plug 'onsails/lspkind.nvim'
-  Plug 'Maan2003/lsp_lines.nvim'
+  " Plug 'Maan2003/lsp_lines.nvim'
   Plug 'zbirenbaum/copilot.lua'
   Plug 'zbirenbaum/copilot-cmp'
 call plug#end()
@@ -162,6 +164,13 @@ nnoremap gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 nnoremap gt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
 nnoremap gi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
 nnoremap gr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+
+" nvim-dap
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> m <Cmd>lua require'dap'.toggle_breakpoint()<CR>
 
 lua <<EOF
 require('setup')

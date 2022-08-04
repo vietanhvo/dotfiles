@@ -66,7 +66,10 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Setup for rust-tools
-require('rust-tools').setup({
+local extension_path = vim.env.HOME .. '/.vscode-server/extensions/vadimcn.vscode-lldb-1.7.3/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+local rust_opts = {
     server = {
         on_attach = on_attach,
         capabilities = capabilities,
@@ -78,8 +81,13 @@ require('rust-tools').setup({
                 },
             }
         }
+    },
+    dap = {
+        adapter = require('rust-tools.dap').get_codelldb_adapter(
+            codelldb_path, liblldb_path)
     }
-})
+}
+require('rust-tools').setup(rust_opts)
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -187,7 +195,7 @@ cmp.setup {
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 -- lsp line diagnostic
-vim.diagnostic.config({
-    virtual_text = false,
-})
-require("lsp_lines").setup()
+-- vim.diagnostic.config({
+--     virtual_text = false,
+-- })
+-- require("lsp_lines").setup()
