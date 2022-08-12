@@ -15,17 +15,17 @@ require('goto-preview').setup {}
 require("dapui").setup()
 local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
+    dapui.open()
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
+    dapui.close()
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
+    dapui.close()
 end
-vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+-- vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
 
--- surround 
+-- surround
 require('nvim-surround').setup {}
 
 -- comment
@@ -190,10 +190,14 @@ require("telescope").setup {
     extensions = {
         ["ui-select"] = {
             require("telescope.themes").get_dropdown {}
+        },
+        media_files = {
+            find_cmd = "rg"
         }
     }
 }
 require("telescope").load_extension("ui-select")
+require('telescope').load_extension('media_files')
 
 require('nvim-autopairs').setup {
     check_ts = true,
@@ -263,7 +267,7 @@ db.custom_center = {
         action = 'Telescope live_grep',
         shortcut = 'SPC w' },
     { icon = '  ',
-        desc = 'Recently latest session                ',
+        desc = 'Recently latest session               ',
         shortcut = 'SPC s l',
         action = 'SessionLoad' },
     { icon = '  ',
