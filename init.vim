@@ -50,9 +50,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'rmagatti/goto-preview'
   Plug 'j-hui/fidget.nvim'
   Plug 'onsails/lspkind.nvim'
-  " Plug 'Maan2003/lsp_lines.nvim'
   Plug 'zbirenbaum/copilot.lua'
   Plug 'zbirenbaum/copilot-cmp'
+  Plug 'rvmelkonian/move.vim'
 call plug#end()
 
 let g:python3_host_prog='/usr/bin/python3'
@@ -66,8 +66,7 @@ endif
 " For dark version.
 set background=dark
 let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_diagnostic_virtual_text = 'colored'
 let g:gruvbox_material_sign_column_background = 'none'
 let g:gruvbox_material_palette = 'original'
 colorscheme gruvbox-material
@@ -152,14 +151,8 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 
 let g:cursorhold_updatetime = 500
 
-" Highlight color for diagnostics virtual text
-hi VirtualTextError guifg=#ff301f
-hi VirtualTextWarning guifg=#ff7800
-hi VirtualTextInformation guifg=#0db9d7
-hi VirtualTextHint guifg=#7aa697
-
 " Highlight for nvim tree
-hi NvimTreeSpecialFile guifg=#F16529
+hi NvimTreeSpecialFile guifg=#ff7800
 
 " Go to preview
 nnoremap gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
