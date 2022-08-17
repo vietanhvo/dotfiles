@@ -83,10 +83,10 @@ require('lualine').setup {
             sources = { 'nvim_lsp' },
             sections = { 'error', 'warn', 'info', 'hint' },
             diagnostics_color = {
-                error = 'VirtualTextError', -- Changes diagnostics' error color.
-                warn  = 'VirtualTextWarning', -- Changes diagnostics' warn color.
-                info  = 'VirtualTextInformation', -- Changes diagnostics' info color.
-                hint  = 'VirtualTextHint', -- Changes diagnostics' hint color.
+                error = 'DiagnosticSignError', -- Changes diagnostics' error color.
+                warn  = 'DiagnosticSignWarn', -- Changes diagnostics' warn color.
+                info  = 'DiagnosticSignInfo', -- Changes diagnostics' info color.
+                hint  = 'DiagnosticSignHint', -- Changes diagnostics' hint color.
             },
             symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
             colored = true,

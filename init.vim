@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rmagatti/goto-preview'
   Plug 'j-hui/fidget.nvim'
   Plug 'onsails/lspkind.nvim'
+  " Plug 'github/copilot.vim'
   Plug 'zbirenbaum/copilot.lua'
   Plug 'zbirenbaum/copilot-cmp'
   Plug 'rvmelkonian/move.vim'
