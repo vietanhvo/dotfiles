@@ -54,12 +54,12 @@ end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'pyright', 'tsserver', 'vimls', 'dockerls', 'sumneko_lua' }
+local servers = { 'pyright', 'tsserver', 'vimls', 'dockerls', 'sumneko_lua', 'solidity_ls', 'dartls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
@@ -67,6 +67,7 @@ for _, lsp in ipairs(servers) do
     }
 end
 
+require("flutter-tools").setup{} -- use defaults
 -- Setup for rust-tools
 local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.7.3/'
 local codelldb_path = extension_path .. 'adapter/codelldb'

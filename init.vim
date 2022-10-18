@@ -32,13 +32,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'mg979/vim-visual-multi', {'branch': 'test'}
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'akinsho/toggleterm.nvim'
+  " Plug 'akinsho/toggleterm.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'p00f/nvim-ts-rainbow'
   Plug 'windwp/nvim-ts-autotag'
   Plug 'windwp/nvim-autopairs'
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'simrat39/rust-tools.nvim'
+  Plug 'akinsho/flutter-tools.nvim'
   Plug 'mfussenegger/nvim-dap'
   Plug 'rcarriga/nvim-dap-ui'
   Plug 'RRethy/vim-illuminate'

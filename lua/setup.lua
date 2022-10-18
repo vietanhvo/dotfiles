@@ -102,7 +102,6 @@ require('lualine').setup {
         lualine_y = {},
         lualine_z = { 'tabs' }
     },
-    extensions = { 'nvim-tree', 'toggleterm' }
 }
 
 -- git
@@ -214,10 +213,7 @@ require('neoscroll').setup({
     mappings = { '<C-u>', '<C-d>', '', '',
         '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
 })
-require("toggleterm").setup {
-    open_mapping = [[<c-\>]],
-    shade_terminals = false,
-}
+
 require('hlargs').setup()
 
 -- crates
