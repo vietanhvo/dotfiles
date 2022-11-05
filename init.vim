@@ -112,7 +112,7 @@ set splitbelow
 set splitright
 
 " Copy to clipboard
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 filetype plugin indent on
 

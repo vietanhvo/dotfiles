@@ -76,24 +76,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- status line
 require('lualine').setup {
     options = { theme = 'gruvbox-material' },
-    sections = {
-        lualine_b = { 'branch', 'diff' },
-        lualine_x = { {
-            'diagnostics',
-            sources = { 'nvim_lsp' },
-            sections = { 'error', 'warn', 'info', 'hint' },
-            diagnostics_color = {
-                error = 'DiagnosticSignError', -- Changes diagnostics' error color.
-                warn  = 'DiagnosticSignWarn', -- Changes diagnostics' warn color.
-                info  = 'DiagnosticSignInfo', -- Changes diagnostics' info color.
-                hint  = 'DiagnosticSignHint', -- Changes diagnostics' hint color.
-            },
-            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
-            colored = true,
-            update_in_insert = false,
-            always_visible = false,
-        }, 'encoding', 'fileformat', 'filetype' },
-    },
+    --[[ sections = { ]]
+    --[[     lualine_b = { 'branch', 'diff' }, ]]
+    --[[     lualine_x = { { ]]
+    --[[         'diagnostics', ]]
+    --[[         sources = { 'nvim_lsp' }, ]]
+    --[[         sections = { 'error', 'warn', 'info', 'hint' }, ]]
+    --[[         diagnostics_color = { ]]
+    --[[             error = 'DiagnosticSignError', -- Changes diagnostics' error color. ]]
+    --[[             warn  = 'DiagnosticSignWarn', -- Changes diagnostics' warn color. ]]
+    --[[             info  = 'DiagnosticSignInfo', -- Changes diagnostics' info color. ]]
+    --[[             hint  = 'DiagnosticSignHint', -- Changes diagnostics' hint color. ]]
+    --[[         }, ]]
+    --[[         symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }, ]]
+    --[[         colored = true, ]]
+    --[[         update_in_insert = false, ]]
+    --[[         always_visible = false, ]]
+    --[[     }, 'encoding', 'fileformat', 'filetype' }, ]]
+    --[[ }, ]]
     tabline = {
         lualine_a = { 'buffers' },
         lualine_b = {},
